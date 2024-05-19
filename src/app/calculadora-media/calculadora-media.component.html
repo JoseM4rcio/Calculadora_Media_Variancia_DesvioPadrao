@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card w-45 mb-3 p-5">
+    <div class="card-body">
+      <h5 class="card-title text-center">
+        Calculadora de Média, Variância e Desvio Padrão
+      </h5>
+      <div
+        *ngFor="let input of inputs; let i = index"
+        class="mb-2 d-flex align-items-center"
+      >
+        <input
+          class="form-control me-2"
+          [(ngModel)]="input.value"
+          placeholder="Valor {{ i + 1 }}"
+          type="number"
+        />
+        <button class="btn btn-danger" (click)="excluirInput(i)">
+          Excluir
+        </button>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-dark mt-3 me-2" (click)="addInput()">
+          Adicionar
+        </button>
+        <button class="btn btn-dark mt-3" (click)="calcularEstatisticas()">
+          Calcular
+        </button>
+      </div>
+      <div *ngIf="resultados" class="mt-4">
+        <h6 class="text-center">Resultados</h6>
+        <ul class="list-group">
+          <li class="list-group-item">
+            Média: {{ resultados.media.toFixed(2) }}
+          </li>
+          <li class="list-group-item">
+            Variância: {{ resultados.variancia.toFixed(2) }}
+          </li>
+          <li class="list-group-item">
+            Desvio Padrão: {{ resultados.desvioPadrao.toFixed(2) }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
