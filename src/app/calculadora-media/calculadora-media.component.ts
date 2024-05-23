@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 interface InputItem {
   value: string;
@@ -24,6 +25,9 @@ export class CalculadoraMediaComponent {
   resultados: Calculo | null = null;
   mensagemErro: string | null = null;
   historico: Calculo[] = [];
+  Valores: number[] = [];
+
+  constructor(private http: HttpClient) { }
 
   addInput() {
     this.inputs.push({ value: '' });
@@ -53,6 +57,8 @@ export class CalculadoraMediaComponent {
     const variancia = this.calcularVariancia(valores, media);
     const desvioPadrao = Math.sqrt(variancia);
 
+    this.Valores = valores
+
     this.resultados = {
       media: media,
       variancia: variancia,
@@ -66,6 +72,8 @@ export class CalculadoraMediaComponent {
     if (this.historico.length > 10) {
       this.historico.shift();
     }
+
+    this.saveResults(media, variancia, desvioPadrao)
   }
 
   adicionarAoHistorico(calculo: Calculo) {
@@ -84,4 +92,16 @@ export class CalculadoraMediaComponent {
     );
     return somaQuadrados / valores.length;
   }
+
+  saveResults(media: number, variancia: number, desvioPadrao: number): void {
+    this.http.post('/api/dataInsert', { media, variancia, desvioPadrao }).subscribe({
+      next: response => {
+        console.log(response);
+      },
+      error: error => {
+        console.error('Erro ao salvar dados:', error);
+      }
+    });
+  }
+
 }
