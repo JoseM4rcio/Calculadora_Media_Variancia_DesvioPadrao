@@ -51,6 +51,7 @@ export class CalculadoraMediaComponent implements OnInit{
   }
 
   calcularEstatisticas() {
+    this.loadResults();
     const valoresNumericos = this.inputs.every(input => {
       const numericValue = parseFloat(input.value);
       return !isNaN(numericValue) && numericValue !== 0;
@@ -84,7 +85,7 @@ export class CalculadoraMediaComponent implements OnInit{
       this.historico.shift();
     }
 
-    this.saveResults(valores, media, variancia, desvioPadrao)
+    this.saveResults(valores, media, variancia, desvioPadrao);
   }
 
   adicionarAoHistorico(calculo: Calculo) {
