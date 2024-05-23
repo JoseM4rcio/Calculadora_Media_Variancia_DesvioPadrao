@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
 
     const query = {
-      text: 'INSERT INTO historico(media, variancia, desvioPadrao) VALUES($1, $2, $3)',
+      text: 'INSERT INTO historico(media, variancia, desvio_padrao) VALUES($1, $2, $3)',
       values: [media, variancia, desvioPadrao],
     };
 
