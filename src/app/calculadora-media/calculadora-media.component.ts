@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 interface InputItem {
   value: string;
@@ -20,14 +21,24 @@ interface Calculo {
   templateUrl: './calculadora-media.component.html',
   styleUrls: ['./calculadora-media.component.css'],
 })
-export class CalculadoraMediaComponent {
+export class CalculadoraMediaComponent implements OnInit{
   inputs: InputItem[] = [{ value: '' }];
   resultados: Calculo | null = null;
   mensagemErro: string | null = null;
   historico: Calculo[] = [];
   Valores: number[] = [];
+  resultsHistory: any[] = [];
 
   constructor(private http: HttpClient) { }
+  ngOnInit(): void {
+    this.loadResults()
+  }
+
+  loadResults(): void{
+    this.fetchResults().subscribe(data => {
+      this.resultsHistory = data.results;
+    });
+  }
 
   addInput() {
     this.inputs.push({ value: '' });
@@ -102,6 +113,10 @@ export class CalculadoraMediaComponent {
         console.error('Erro ao salvar dados:', error);
       }
     });
+  }
+
+  fetchResults(): Observable<any> {
+    return this.http.get('/api/dataGet');
   }
 
 }

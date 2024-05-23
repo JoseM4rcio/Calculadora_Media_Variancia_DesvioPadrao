@@ -44,17 +44,16 @@
           </li>
         </ul>
       </div>
-      VALORES: {{Valores}}
 
 
-    <div *ngIf="historico.length > 0" class="mt-4">
+    <div *ngFor="let result of resultsHistory" class="mt-4">
       <h6 class="text-center">Histórico</h6>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let calculo of historico">
-          <div>Média: {{ calculo.media.toFixed(2) }}</div>
-          <div>Variância: {{ calculo.variancia.toFixed(2) }}</div>
-          <div>Desvio Padrão: {{ calculo.desvioPadrao.toFixed(2) }}</div>
-          <div>Valores {{ Valores }}</div>
+        <li class="list-group-item">
+          <div>Média: {{ result.media.toFixed(2) }}</div>
+          <div>Variância: {{ result.variancia.toFixed(2) }}</div>
+          <div>Desvio Padrão: {{ result.desvio_padrao.toFixed(2) }}</div>
+          <div>Valores {{ result.valores }}</div>
         </li>
       </ul>
     </div>

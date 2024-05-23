@@ -8,23 +8,20 @@ module.exports = async (req, res) => {
     },
   });
 
-  try {
-    await client.connect();
+  await client.connect();
 
-    const { valores, media, variancia, desvioPadrao } = req.body;
+  const { valores, media, variancia, desvioPadrao } = req.body;
 
 
-    const query = {
-      text: 'INSERT INTO historico(valores ,media, variancia, desvio_padrao) VALUES($1, $2, $3, $4)',
-      values: [valores, media, variancia, desvioPadrao],
-    };
+  const query = {
+    text: 'INSERT INTO historico(valores, media, variancia, desvio_padrao) VALUES($1, $2, $3, $4)',
+    values: [valores, media, variancia, desvioPadrao],
+  };
 
-    await client.query(query);
-    res.json({ status: 'success' });
-  } catch (error) {
-    console.error('Error saving data:', error);
-    res.status(500).json({ status: 'error', message: error.message });
-  } finally {
-    await client.end();
-  }
+  await client.query(query)
+
+  res.json({ status: 'success' })
+
+  client.end()
+
 };
