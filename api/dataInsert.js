@@ -11,12 +11,12 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
 
-    const { media, variancia, desvioPadrao } = req.body;
+    const { valores, media, variancia, desvioPadrao } = req.body;
 
 
     const query = {
-      text: 'INSERT INTO historico(media, variancia, desvio_padrao) VALUES($1, $2, $3)',
-      values: [media, variancia, desvioPadrao],
+      text: 'INSERT INTO historico(valores ,media, variancia, desvio_padrao) VALUES($1, $2, $3, $4)',
+      values: [valores, media, variancia, desvioPadrao],
     };
 
     await client.query(query);

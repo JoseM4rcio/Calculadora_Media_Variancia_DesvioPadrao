@@ -73,7 +73,7 @@ export class CalculadoraMediaComponent {
       this.historico.shift();
     }
 
-    this.saveResults(media, variancia, desvioPadrao)
+    this.saveResults(valores, media, variancia, desvioPadrao)
   }
 
   adicionarAoHistorico(calculo: Calculo) {
@@ -93,8 +93,8 @@ export class CalculadoraMediaComponent {
     return somaQuadrados / valores.length;
   }
 
-  saveResults(media: number, variancia: number, desvioPadrao: number): void {
-    this.http.post('/api/dataInsert', { media, variancia, desvioPadrao }).subscribe({
+  saveResults(valores: number[], media: number, variancia: number, desvioPadrao: number): void {
+    this.http.post('/api/dataInsert', { valores, media, variancia, desvioPadrao }).subscribe({
       next: response => {
         console.log(response);
       },
