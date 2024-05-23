@@ -46,14 +46,15 @@
       </div>
 
 
-    <div *ngFor="let result of resultsHistory" class="mt-4">
+    <div class="mt-4">
       <h6 class="text-center">Histórico</h6>
       <ul class="list-group">
-        <li class="list-group-item">
-          <div>Média: {{ result.media }}</div>
-          <div>Variância: {{ result.variancia}}</div>
-          <div>Desvio Padrão: {{ result.desvio_padrao }}</div>
+        <li *ngFor="let result of resultsHistory" class="list-group-item">
+          <div>Média: {{ result.media | number:'1.2-2' }}</div>
+          <div>Variância: {{ result.variancia | number:'1.2-2' }}</div>
+          <div>Desvio Padrão: {{ result.desvio_padrao | number:'1.2-2' }}</div>
           <div>Valores {{ result.valores }}</div>
+          <hr>
         </li>
       </ul>
     </div>
