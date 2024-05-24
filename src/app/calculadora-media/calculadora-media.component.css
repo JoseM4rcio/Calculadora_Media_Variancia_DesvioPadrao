@@ -1,5 +1,6 @@
 .card {
   background-color: rgb(209, 209, 209);
+  margin-top: 15%;
 }
 
 input[type="number"]::-webkit-inner-spin-button {
