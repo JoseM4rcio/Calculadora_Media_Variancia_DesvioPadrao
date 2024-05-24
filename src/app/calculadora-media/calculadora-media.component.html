@@ -19,6 +19,9 @@
           Excluir
         </button>
       </div>
+      <div class="text-center text-danger" *ngIf="mensagemErro">
+        {{ mensagemErro }}
+      </div>
       <div class="text-center">
         <button class="btn btn-dark mt-3 me-2" (click)="addInput()">
           Adicionar
@@ -26,9 +29,6 @@
         <button class="btn btn-dark mt-3" (click)="calcularEstatisticas()">
           Calcular
         </button>
-        <div class="text-center text-danger" *ngIf="mensagemErro">
-          {{ mensagemErro }}
-        </div>
       </div>
       <div *ngIf="resultados" class="mt-4">
         <h6 class="text-center">Resultados</h6>

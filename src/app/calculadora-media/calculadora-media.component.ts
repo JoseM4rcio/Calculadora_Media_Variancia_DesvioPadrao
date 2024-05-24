@@ -45,10 +45,15 @@ export class CalculadoraMediaComponent implements OnInit{
   }
 
   excluirInput(index: number) {
-    if (index >= 0 && index < this.inputs.length) {
+    if (index >= 0 && index < this.inputs.length && this.inputs.length > 1) {
       this.inputs.splice(index, 1);
+      this.mensagemErro = null;
+    } else {
+      this.mensagemErro = 'Não é possível excluir a última entrada.';
     }
   }
+  
+  
 
   calcularEstatisticas() {
     this.loadResults();
